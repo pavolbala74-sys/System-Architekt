@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-bg: #F8F9FA;
+  --color-bg-alt: #F2F3F5;
+  --color-surface: #FFFFFF;
+  --color-border: rgba(28, 33, 40, 0.08);
+  --color-border-strong: rgba(28, 33, 40, 0.16);
+
+  --color-text-primary: #1C2128;
+  --color-text-secondary: #5F6368;
+  --color-text-muted: #9AA0A8;
+
+  --color-navy: #0D1B2A;
+  --color-navy-deep: #080F18;
+  --color-blue: #1A3A5C;
+  --color-blue-accent: #2563A8;
+  --color-steel: #9AA0A8;
+
+  --spacing-section: 120px;
+  --spacing-section-sm: 80px;
+  --border-radius: 2px;
+  --border-radius-lg: 4px;
+
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-enter: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── Typography System ─────────────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+.font-mono    { font-family: var(--font-mono); }
+
+h1, h2, h3, .heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.label-engineering {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-steel);
+}
+
+/* ─── Layout ────────────────────────────────────────────────────── */
+.container-eng {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+  .container-eng { padding: 0 24px; }
+}
+
+.section-padding {
+  padding: var(--spacing-section) 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding { padding: var(--spacing-section-sm) 0; }
+}
+
+/* ─── Surface Components ────────────────────────────────────────── */
+.card-eng {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  transition: var(--transition-base);
+}
+
+.card-eng:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: 0 8px 40px rgba(13, 27, 42, 0.06);
+  transform: translateY(-2px);
+}
+
+/* ─── Divider Lines ─────────────────────────────────────────────── */
+.rule-eng {
+  height: 1px;
+  background: var(--color-border);
+  width: 100%;
+}
+
+.rule-eng-accent {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-blue-accent) 0%, transparent 100%);
+  width: 60px;
+}
+
+/* ─── Button System ─────────────────────────────────────────────── */
+.btn-eng {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border-strong);
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: var(--transition-base);
+  border-radius: var(--border-radius);
+}
+
+.btn-eng:hover {
+  background: var(--color-text-primary);
+  color: var(--color-bg);
+  border-color: var(--color-text-primary);
+}
+
+.btn-eng-ghost {
+  border-color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8);
+}
+
+.btn-eng-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* ─── Custom Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-steel); border-radius: 2px; }
+
+/* ─── Selection ─────────────────────────────────────────────────── */
+::selection {
+  background: rgba(37, 99, 168, 0.15);
+  color: var(--color-text-primary);
+}
+
+/* ─── Noise Texture Overlay ─────────────────────────────────────── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ─── Flow Animation Canvas ─────────────────────────────────────── */
+.canvas-flow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Grid Reference Lines ──────────────────────────────────────── */
+.grid-reference {
+  background-image:
+    linear-gradient(rgba(28,33,40,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28,33,40,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Metric Display ─────────────────────────────────────────────── */
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 300;
+  color: var(--color-text-primary);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.metric-unit {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-steel);
+  letter-spacing: 0.1em;
+}
+
+/* ─── Input System ───────────────────────────────────────────────── */
+.input-eng {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  color: var(--color-text-primary);
+  outline: none;
+  transition: var(--transition-base);
+}
+
+.input-eng:focus {
+  border-color: var(--color-blue-accent);
+  background: var(--color-surface);
+}
+
+.select-eng {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239AA0A8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+/* ─── Dark Section ───────────────────────────────────────────────── */
+.section-dark {
+  background: var(--color-navy);
+  color: rgba(255,255,255,0.85);
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3 {
+  color: rgba(255,255,255,0.95);
+}
+
+.section-dark .label-engineering {
+  color: rgba(255,255,255,0.35);
+}
+
+/* ─── Animations ─────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.animate-draw-line {
+  stroke-dasharray: 1000;
+  animation: drawLine 3s ease-out forwards;
+}
+
+/* ─── Prose ──────────────────────────────────────────────────────── */
+.prose-eng {
+  font-size: 16px;
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  max-width: 640px;
+}
+
+.prose-eng p + p { margin-top: 1.25em; }
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hide-mobile { display: none; }
+  .metric-value { font-size: 40px; }
+}
