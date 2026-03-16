@@ -1,6 +1,6 @@
 {
   "name": "balazik-engineering",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,6 @@
     "lint": "next lint",
     "test": "jest --passWithNoTests",
     "test:e2e": "playwright test",
-    "test:perf": "jest --testPathPattern=perf",
     "diagnostics": "node scripts/diagnostics.js",
     "type-check": "tsc --noEmit"
   },
@@ -24,7 +23,8 @@
     "chart.js": "^4.4.3",
     "react-chartjs-2": "^5.2.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.408.0"
+    "lucide-react": "^0.408.0",
+    "next-intl": "^3.17.2"
   },
   "devDependencies": {
     "@types/node": "^20",

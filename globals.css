@@ -1,0 +1,198 @@
+'use client'
+
+import { motion, useInView } from 'framer-motion'
+import { useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
+
+// ── Philosophy Section ────────────────────────────────────────────────
+export function PhilosophySection() {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const t = useTranslations()
+
+  const principles = [
+    {
+      n: '01',
+      title: 'Systems before components',
+      text: 'Optimising a component in isolation rarely produces lasting efficiency gains. The system is the unit of analysis. Interactions between components create emergent loss mechanisms invisible at the component level.',
+    },
+    {
+      n: '02',
+      title: 'Measure before optimise',
+      text: 'Engineering intuition is insufficient for complex systems. Quantified loss accounting replaces assumption with evidence. The highest-leverage intervention is almost never the obvious one.',
+    },
+    {
+      n: '03',
+      title: 'Physics governs',
+      text: 'Every inefficiency has a physical explanation rooted in thermodynamics, fluid mechanics, or contact mechanics. Understanding the mechanism is prerequisite to correcting it. Empirical shortcuts compound downstream.',
+    },
+    {
+      n: '04',
+      title: 'Breakthroughs from clarity',
+      text: 'Significant performance improvements rarely require new invention. They require clarity about where energy is disappearing. Diagnosis is the discipline. Solutions often follow naturally.',
+    },
+  ]
+
+  return (
+    <section id="philosophy" className="section-padding section-dark relative overflow-hidden" ref={ref}>
+      <div
+        className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 font-display text-[320px] font-400 text-[rgba(255,255,255,0.02)] whitespace-nowrap pointer-events-none select-none leading-none hide-mobile"
+        aria-hidden="true">η</div>
+
+      <div className="container-eng relative z-10">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }} className="mb-16">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-6 h-px bg-[rgba(255,255,255,0.3)]" />
+            <span className="label-engineering">{t('philosophy_label')}</span>
+          </div>
+          <blockquote className="max-w-3xl">
+            <p className="font-display text-white"
+              style={{ fontSize: 'clamp(24px, 3vw, 44px)', fontWeight: 400, lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+              &ldquo;{t('philosophy_quote')
+                .split('hidden inefficiencies')
+                .map((part, i) =>
+                  i === 0
+                    ? <span key={i}>{part}<em style={{ color: 'var(--color-blue-accent)', fontStyle: 'italic' }}>hidden inefficiencies</em></span>
+                    : <span key={i}>{part}</span>
+                )}&rdquo;
+            </p>
+          </blockquote>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-px bg-[rgba(255,255,255,0.06)]">
+          {principles.map((p, i) => (
+            <motion.div key={p.n}
+              initial={{ opacity: 0, y: 24 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.2 + i * 0.1 }}
+              className="p-8 bg-[var(--color-navy)] group">
+              <div className="flex items-start gap-5">
+                <span className="font-mono text-[11px] text-[rgba(255,255,255,0.25)] tracking-[0.2em] mt-1 shrink-0">{p.n}</span>
+                <div>
+                  <h3 className="font-display text-white mb-3" style={{ fontSize: '20px', fontWeight: 400 }}>{p.title}</h3>
+                  <p className="text-[13px] font-300 text-[rgba(255,255,255,0.45)] leading-relaxed">{p.text}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── Contact Section ───────────────────────────────────────────────────
+export function ContactSection() {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const t = useTranslations()
+  const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState({ name: '', org: '', email: '', message: '' })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitted(true)
+  }
+
+  return (
+    <section id="contact" className="section-padding bg-[var(--color-bg)]" ref={ref}>
+      <div className="container-eng">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }} className="mb-16">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="rule-eng-accent" />
+            <span className="label-engineering">{t('contact_label')}</span>
+          </div>
+          <div className="grid md:grid-cols-2 gap-16">
+            <h2 className="font-display" style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 400, lineHeight: 1.1 }}>
+              {t('contact_title_1')}
+              <br />{t('contact_title_2')}
+            </h2>
+            <div className="prose-eng self-end">
+              <p>{t('contact_body')}</p>
+              <div className="flex flex-col gap-2 mt-6">
+                <a href="mailto:pavol@balazik.engineering"
+                  className="font-mono text-[13px] text-[var(--color-blue-accent)] hover:underline">
+                  pavol@balazik.engineering
+                </a>
+                <a href="https://www.linkedin.com/in/pavol-balazik-512a71247"
+                  target="_blank" rel="noopener noreferrer"
+                  className="font-mono text-[13px] text-[var(--color-text-muted)] hover:text-[var(--color-blue-accent)] transition-colors">
+                  {t('contact_linkedin')}
+                </a>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }} className="max-w-2xl">
+          {submitted ? (
+            <div className="p-8 border border-[var(--color-border)] text-center">
+              <div className="font-mono text-[13px] text-[var(--color-blue-accent)] mb-2">{t('contact_success_title')}</div>
+              <p className="text-[var(--color-text-muted)] text-[14px]">{t('contact_success_body')}</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="label-engineering block mb-2">{t('contact_name')}</label>
+                  <input type="text" required className="input-eng" placeholder={t('contact_name_placeholder')}
+                    value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} />
+                </div>
+                <div>
+                  <label className="label-engineering block mb-2">{t('contact_org')}</label>
+                  <input type="text" className="input-eng" placeholder={t('contact_org_placeholder')}
+                    value={form.org} onChange={e => setForm(p => ({ ...p, org: e.target.value }))} />
+                </div>
+              </div>
+              <div>
+                <label className="label-engineering block mb-2">{t('contact_email')}</label>
+                <input type="email" required className="input-eng" placeholder={t('contact_email_placeholder')}
+                  value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} />
+              </div>
+              <div>
+                <label className="label-engineering block mb-2">{t('contact_message')}</label>
+                <textarea required rows={5} className="input-eng resize-none"
+                  placeholder={t('contact_message_placeholder')}
+                  value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} />
+              </div>
+              <button type="submit" className="btn-eng">
+                {t('contact_send')}
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </form>
+          )}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// ── Footer ────────────────────────────────────────────────────────────
+export function Footer() {
+  const t = useTranslations()
+  return (
+    <footer className="border-t border-[var(--color-border)] py-8">
+      <div className="container-eng">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[11px] text-[var(--color-text-primary)] tracking-[0.15em] uppercase">
+              {t('footer_author')}
+            </span>
+            <span className="label-engineering">{t('footer_role')}</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <span className="label-engineering">© {new Date().getFullYear()} — {t('footer_rights')}</span>
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-blue-accent)] animate-pulse" />
+              <span className="label-engineering">{t('footer_available')}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

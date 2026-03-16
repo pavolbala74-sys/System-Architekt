@@ -1,0 +1,75 @@
+/**
+ * Shared utility functions
+ */
+
+/** Clamp a number between min and max */
+export function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value))
+}
+
+/** Linear interpolation */
+export function lerp(a: number, b: number, t: number): number {
+  return a + (b - a) * clamp(t, 0, 1)
+}
+
+/** Convert velocity km/h to m/s */
+export function kmhToMs(kmh: number): number {
+  return kmh / 3.6
+}
+
+/** Format large numbers with locale separators */
+export function formatNumber(n: number, decimals = 0): string {
+  return n.toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  })
+}
+
+/** Calculate aerodynamic drag force (N) */
+export function dragForce(
+  rho: number,       // fluid density kg/m³
+  velocity: number,  // m/s
+  cd: number,        // drag coefficient
+  area: number,      // reference area m²
+): number {
+  return 0.5 * rho * velocity * velocity * cd * area
+}
+
+/** Calculate Reynolds number */
+export function reynoldsNumber(
+  velocity: number,       // m/s
+  length: number,         // characteristic length m
+  kinematicViscosity = 1.516e-5, // m²/s (air at 20°C)
+): number {
+  return (velocity * length) / kinematicViscosity
+}
+
+/** Determine flow regime from Reynolds number */
+export function flowRegime(re: number): 'laminar' | 'transitional' | 'turbulent' {
+  if (re < 2300) return 'laminar'
+  if (re < 4000) return 'transitional'
+  return 'turbulent'
+}
+
+/** Darcy-Weisbach pressure drop in pipe (Pa) */
+export function pipefrictionLoss(
+  frictionFactor: number,
+  length: number,        // m
+  diameter: number,      // m
+  rho: number,           // kg/m³
+  velocity: number,      // m/s
+): number {
+  return frictionFactor * (length / diameter) * 0.5 * rho * velocity * velocity
+}
+
+/** Debounce a function */
+export function debounce<T extends (...args: unknown[]) => void>(
+  fn: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let timer: ReturnType<typeof setTimeout>
+  return (...args) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => fn(...args), delay)
+  }
+}

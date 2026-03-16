@@ -1,4 +1,4 @@
-# Pavol Baláž — Engineering Laboratory
+# Pavol Balazik — Engineering Systems Architect
 
 **Independent Systems Architect** | Energy Efficiency · Friction Reduction · Hydrodynamics · Aerodynamics
 
@@ -247,3 +247,49 @@ No environment variables required for the base website.
 ---
 
 *Designed to feel like entering a quiet aerospace research laboratory.*
+
+---
+
+## Internationalisation (i18n)
+
+Built with **next-intl** supporting three locales:
+
+| Route  | Language |
+|--------|----------|
+| `/en`  | English (default) |
+| `/sk`  | Slovak  |
+| `/de`  | German  |
+
+### Translation files
+
+```
+messages/
+├── en.json   # English
+├── sk.json   # Slovak
+└── de.json   # German
+```
+
+### Language switcher
+
+The navigation bar includes an **EN | SK | DE** switcher that performs a
+client-side locale transition while preserving the current scroll position
+and active section.
+
+### Adding a new locale
+
+1. Add the locale code to `i18n.ts` → `locales` array
+2. Create `/messages/<locale>.json` with all required keys
+3. Add a `LOCALE_LABELS` entry in `Navigation.tsx`
+4. The middleware and static params generation handle routing automatically.
+
+---
+
+## Changelog
+
+### v1.1.0
+- Fixed author name to **Pavol Balazik** across all files
+- Updated LinkedIn link to `https://www.linkedin.com/in/pavol-balazik-512a71247 
+- Added full **next-intl** i18n support (EN / SK / DE)
+- Added language switcher to Navigation (desktop + mobile)
+- Updated metadata: title and description
+- Migrated page structure to `app/[locale]/` routing
