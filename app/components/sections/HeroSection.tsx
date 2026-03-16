@@ -182,7 +182,7 @@ export default function HeroSection() {
             <div className="rule-eng-accent" />
             <div>
               <p className="font-mono text-[13px] font-400 text-[var(--color-text-primary)] tracking-[0.08em]">
-                Pavol Baláž
+                Pavol Balazik
               </p>
               <p className="label-engineering mt-0.5">Independent Systems Architect</p>
             </div>
