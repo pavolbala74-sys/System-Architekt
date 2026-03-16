@@ -10,7 +10,7 @@ const config: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
   },
-  testPathPattern: ['<rootDir>/tests/unit/'],
+  
   passWithNoTests: true,
 }
 
